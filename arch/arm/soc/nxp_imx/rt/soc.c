@@ -151,6 +151,12 @@ static ALWAYS_INLINE void clkInit(void)
 	CLOCK_SetMux(kCLOCK_UartMux, 0); /* Set UART source to PLL3 80M */
 	CLOCK_SetDiv(kCLOCK_UartDiv, 0); /* Set UART divider to 1 */
 #endif
+
+#ifdef CONFIG_I2C_MCUX_LPI2C
+	/* Configure I2C divider to default */
+	CLOCK_SetMux(kCLOCK_Lpi2cMux, 0); /* Select USB1 PLL (480 MHz) as master lpi2c clock source */
+	CLOCK_SetDiv(kCLOCK_Lpi2cDiv, 5U); /* Clock divider for master lpi2c clock source */
+#endif
 }
 
 /**

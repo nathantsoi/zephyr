@@ -6,6 +6,7 @@
 
 #include <init.h>
 #include <fsl_iomuxc.h>
+#include <fsl_lpi2c.h>
 
 static int mimxrt1050_evk_init(struct device *dev)
 {
@@ -39,6 +40,21 @@ static int mimxrt1050_evk_init(struct device *dev)
 			    IOMUXC_SW_PAD_CTL_PAD_PKE_MASK |
 			    IOMUXC_SW_PAD_CTL_PAD_SPEED(2) |
 			    IOMUXC_SW_PAD_CTL_PAD_DSE(6));
+#endif
+
+	/* FXOS8700 INT1 */
+	IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B0_10_GPIO1_IO10, 1U);
+
+	/* FXOS8700 INT2 */
+	IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B0_11_GPIO1_IO11, 1U);
+
+#if CONFIG_I2C_MCUX_LPI2C_1
+	/* LPI2C1 SCL, SDA */
+	IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B1_00_LPI2C1_SCL, 1U);
+	IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B1_01_LPI2C1_SDA, 1U);
+	// From the bubble example pin_mux.c
+	IOMUXC_SetPinConfig(IOMUXC_GPIO_AD_B1_00_LPI2C1_SCL, 0xF8B0u);
+	IOMUXC_SetPinConfig(IOMUXC_GPIO_AD_B1_01_LPI2C1_SDA, 0xF8B0u);
 #endif
 
 	return 0;

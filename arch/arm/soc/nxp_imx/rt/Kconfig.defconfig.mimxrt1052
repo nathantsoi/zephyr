@@ -33,6 +33,9 @@ if SERIAL
 config UART_MCUX_LPUART
 	def_bool y
 
+config I2C_MCUX_LPI2C
+	def_bool y
+
 endif # SERIAL
 
 endif # SOC_MIMXRT1052

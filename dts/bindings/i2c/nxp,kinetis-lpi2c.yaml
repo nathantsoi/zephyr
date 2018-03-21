@@ -1,0 +1,29 @@
+---
+title: Kinetis LPI2C
+id: nxp,kinetis-lpi2c
+version: 0.1
+
+description: >
+    This binding gives a base representation of the Kinetis LPI2C
+
+inherits:
+    !include i2c.yaml
+
+properties:
+    compatible:
+      type: string
+      category: required
+      description: compatible strings
+      constraint: "nxp,kinetis-lpi2c"
+
+    reg:
+      type: array
+      description: mmio register space
+      generation: define
+      category: required
+
+    interrupts:
+      type: array
+      category: required
+      description: required interrupts
+      generation: define

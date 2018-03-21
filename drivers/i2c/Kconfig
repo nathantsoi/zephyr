@@ -211,4 +211,6 @@ source "drivers/i2c/Kconfig.sbcon"
 
 source "drivers/i2c/Kconfig.stm32"
 
+source "drivers/i2c/Kconfig.mcux_lpi2c"
+
 endif # I2C

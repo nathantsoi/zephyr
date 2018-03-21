@@ -50,18 +50,25 @@ void main(void)
 		return;
 	}
 
-	struct sensor_trigger trig = {
-		.type = SENSOR_TRIG_DATA_READY,
-		.chan = SENSOR_CHAN_ACCEL_XYZ,
-	};
+	//struct sensor_trigger trig = {
+	//	.type = SENSOR_TRIG_DATA_READY,
+	//	.chan = SENSOR_CHAN_ACCEL_XYZ,
+	//};
 
-	if (sensor_trigger_set(dev, &trig, trigger_handler)) {
-		printf("Could not set trigger\n");
-		return;
-	}
+	//if (sensor_trigger_set(dev, &trig, trigger_handler)) {
+	//	printf("Could not set trigger\n");
+	//	return;
+	//}
 
 	while (1) {
-		k_sem_take(&sem, K_FOREVER);
+		//k_sem_take(&sem, K_FOREVER);
+
+		printf("sampling\n");
+
+		if (sensor_sample_fetch(dev)) {
+			printf("sensor_sample_fetch failed\n");
+			return;
+		}
 
 		sensor_channel_get(dev, SENSOR_CHAN_ACCEL_XYZ, accel);
 		sensor_channel_get(dev, SENSOR_CHAN_MAGN_XYZ, magn);
@@ -78,5 +85,8 @@ void main(void)
 		       sensor_value_to_double(&magn[1]),
 		       sensor_value_to_double(&magn[2]),
 		       sensor_value_to_double(&temp));
+
+		k_sleep(1000);
 	}
+
 }

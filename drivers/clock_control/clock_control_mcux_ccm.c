@@ -38,8 +38,16 @@ static int mcux_ccm_get_subsys_rate(struct device *dev,
 		} else {
 			*rate = CLOCK_GetOscFreq()
 				/ (CLOCK_GetDiv(kCLOCK_UartDiv) + 1);
+    }
+    break;
+	case IMX_CCM_LPI2C_CLK:
+		if (CLOCK_GetMux(kCLOCK_Lpi2cMux) == 0) {
+			*rate = CLOCK_GetPllFreq(kCLOCK_PllUsb1) / 8
+				/ (CLOCK_GetDiv(kCLOCK_Lpi2cDiv) + 1);
+		} else {
+			*rate = CLOCK_GetOscFreq()
+				/ (CLOCK_GetDiv(kCLOCK_Lpi2cDiv) + 1);
 		}
-
 		break;
 	}
 

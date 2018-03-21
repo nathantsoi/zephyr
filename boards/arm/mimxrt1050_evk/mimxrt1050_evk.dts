@@ -19,12 +19,23 @@
 		gpio_4= &gpio4;
 		gpio_5= &gpio5;
 		uart_1 = &uart1;
+		i2c_1 = &i2c1;
 	};
 
 	chosen {
 		zephyr,flash = &itcm0;
 		zephyr,sram = &dtcm0;
 		zephyr,console = &uart1;
+	};
+};
+
+&i2c1 {
+	status = "ok";
+
+	fxos8700@1f {
+		compatible = "nxp,fxos8700";
+		reg = <0x1f>;
+		label = "FXOS8700";
 	};
 };
 
