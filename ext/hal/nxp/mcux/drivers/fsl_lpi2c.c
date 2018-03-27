@@ -996,10 +996,10 @@ static status_t LPI2C_RunTransferStateMachine(LPI2C_Type *base, lpi2c_master_han
 
             case kWaitForCompletionState:
                 /* We stay in this state until the stop state is detected. */
-                if (status & kLPI2C_MasterStopDetectFlag)
-                {
+                //if (status & kLPI2C_MasterStopDetectFlag)
+                //{
                     *isDone = true;
-                }
+                //}
                 state_complete = true;
                 break;
             default:

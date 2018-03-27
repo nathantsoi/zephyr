@@ -295,10 +295,8 @@ static int fxos8700_init(struct device *dev)
 	 * acknowledgment (ACK) of the written byte to the master. Therefore,
 	 * do not check the return code of the I2C transaction.
 	 */
-	// TODO: on the imx1050 board, the gyro stops responding aftering sending the
-	//  reset and must be power cycled. I wonder if it goes into SPI mode?
-	//i2c_reg_write_byte(data->i2c, config->i2c_address,
-	//		   FXOS8700_REG_CTRLREG2, FXOS8700_CTRLREG2_RST_MASK);
+	i2c_reg_write_byte(data->i2c, config->i2c_address,
+			   FXOS8700_REG_CTRLREG2, FXOS8700_CTRLREG2_RST_MASK);
 
 	/* The sensor requires us to wait 1 ms after a software reset before
 	 * attempting further communications.
